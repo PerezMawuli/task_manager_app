@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Task & Assignment Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- LOGIN PAGE CONTAINER -->
+  <div id="loginContainer" class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>📚 Student Login</h1>
+        <p>Enter your email and password to access your tasks.</p>
+      </div>
+
+      <form id="loginForm">
+        <div id="loginError" class="auth-error hidden"></div>
+
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="akwesiessien@gmail.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+
+      <div class="auth-footer-prompt">
+        <p>Don't have a registered account?</p>
+        <button type="button" id="goToRegisterBtn" class="btn btn-secondary-link">Register Here</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTRATION PAGE CONTAINER -->
+  <div id="registerContainer" class="auth-wrapper hidden">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>📝 Register Account</h1>
+        <p>Create an account to start tracking your study tasks.</p>
+      </div>
+
+      <form id="registerForm">
+        <div id="registerError" class="auth-error hidden"></div>
+        <div id="registerSuccess" class="auth-success hidden"></div>
+
+        <div class="form-group">
+          <label for="registerEmail">Email Address</label>
+          <input type="email" id="registerEmail" placeholder="akwesiessien@gmail.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" placeholder="••••••••" required minlength="6" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Account</button>
+      </form>
+
+      <div class="auth-footer-prompt">
+        <p>Already have an account?</p>
+        <button type="button" id="goToLoginBtn" class="btn btn-secondary-link">Back to Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APP CONTAINER (Shown when logged in) -->
+  <div id="appContainer" class="container hidden">
+    <header class="app-header">
+      <div class="header-top">
+        <h1>📚 Study Task Tracker</h1>
+        <button id="logoutBtn" class="btn btn-outline">Logout</button>
+      </div>
+      <p id="userWelcome">Welcome back!</p>
+    </header>
+
+    <!-- Progress Dashboard -->
+    <section class="dashboard">
+      <div class="stat-card">
+        <span class="stat-number" id="totalCount">0</span>
+        <span class="stat-label">Total Tasks</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="completedCount">0</span>
+        <span class="stat-label">Completed</span>
+      </div>
+      <div class="stat-card progress-card">
+        <div class="progress-info">
+          <span>Overall Progress</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add Task Form -->
+    <section class="card form-card">
+      <h2>Add New Task</h2>
+      <form id="taskForm">
+        <div class="form-group">
+          <label for="taskTitle">Task Title *</label>
+          <input type="text" id="taskTitle" placeholder="e.g., Read Chapter 4 & take notes" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="taskSubject">Subject / Course *</label>
+            <input type="text" id="taskSubject" placeholder="e.g., Biology 101" required />
+          </div>
+
+          <div class="form-group">
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="taskDueDate">Due Date</label>
+            <input type="date" id="taskDueDate" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Task</button>
+      </form>
+    </section>
+
+    <!-- Filter & Sort Controls -->
+    <section class="controls-bar">
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="pending">Pending</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+      </div>
+
+      <div class="search-sort">
+        <input type="text" id="searchInput" placeholder="Search tasks or subjects..." />
+      </div>
+    </section>
+
+    <!-- Task List -->
+    <main class="task-list-container">
+      <div id="loadingSpinner" class="spinner hidden"></div>
+      <ul id="taskList" class="task-list"></ul>
+      
+      <div id="emptyState" class="empty-state hidden">
+        <div class="empty-icon">📝</div>
+        <h3>No tasks found</h3>
+        <p>Add a new assignment or study item above to get started!</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- CRITICAL SCRIPT LOADING ORDER -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
