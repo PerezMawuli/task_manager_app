@@ -2,7 +2,7 @@
 // Make sure these match your Supabase API settings!
 const SUPABASE_URL = 'https://iirxsqpmpvfeaatrbxjn.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_oInzwnwn4OQZa1XmVypnMq_iHMCkZ2A';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // --- State Management ---
 let currentUser = null;
